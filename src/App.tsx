@@ -1,23 +1,33 @@
-import { recipes } from "./data";
+import React from "react";
 
-export default function RecipeList() {
+const poem = {
+  lines: [
+    'I write, erase, rewrite',
+    'Erase again, and then',
+    'A poppy blooms.'
+  ]
+};
+
+export default function Poem() {
+  let output: React.JSX.Element[] = []
+
+  // Fill the output array
+  poem.lines.forEach((line, i) => {
+    output.push(
+      <hr key={i + '-separator'} />
+    );
+    output.push(
+      <p key={i + '-text'}>
+        {line}
+      </p>
+    );
+  });
+  // Remove the first <hr />
+  output.shift();
+
   return (
-    <div>
-      <h1>Recipes</h1>
-      {
-        recipes.map(recipe => 
-          <div key={recipe.id}>
-            <h2>{recipe.name}</h2>
-            <ul>
-              {recipe.ingredients.map(ingredient =>
-                <li key={ingredient}>
-                  {ingredient}
-                </li>
-              )}
-            </ul>
-          </div>
-        )
-      }
-    </div>
+    <article>
+      {output}
+    </article>
   )
 }
