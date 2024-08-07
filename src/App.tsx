@@ -1,26 +1,17 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { people } from "./data";
+import { getImageUrl } from "./utils";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+export default function List () {
+  const chemists = people.filter(person => person.profession === 'chemist')
+  const listItems = chemists.map(person =>
+    <li>
+      <img src={getImageUrl(person)} alt={person.name} />
+      <p>
+      <b>{person.name}:</b>
+        {' ' + person.profession + ' '}
+        known for: {person.accomplishment}
+      </p>
+    </li>
   );
+  return <ul>{listItems}</ul>;
 }
-
-export default App;
